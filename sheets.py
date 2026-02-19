@@ -36,7 +36,15 @@ LOG_HEADERS = [
 def get_client():
     import json
 
-    creds_json_str = os.getenv("GOOGLE_CREDENTIALS_JSON")
+    creds_json_str = os.getenv("GOOGLE_CREDENTIALS_JSON", "")
+
+    # Strip surrounding quotes if Railway added them
+    creds_json_str = creds_json_str.strip()
+    if creds_json_str.startswith('"') and creds_json_str.endswith('"'):
+        creds_json_str = creds_json_str[1:-1]
+
+    # Fix escaped quotes that Railway might add
+    creds_json_str = creds_json_str.replace('\\"', '"')
 
     if creds_json_str:
         creds_dict = json.loads(creds_json_str)
@@ -46,7 +54,6 @@ def get_client():
         creds = Credentials.from_service_account_file(creds_path, scopes=SCOPES)
 
     return gspread.authorize(creds)
-
 
 def get_spreadsheet():
     client = get_client()
