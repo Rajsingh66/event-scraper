@@ -39,27 +39,13 @@ def get_client():
     creds_json_str = os.getenv("GOOGLE_CREDENTIALS_JSON")
 
     if creds_json_str:
-        # Running on Railway — credentials passed as env variable
         creds_dict = json.loads(creds_json_str)
         creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
     else:
-        # Running locally — read from credentials.json file
         creds_path = os.getenv("GOOGLE_CREDENTIALS_PATH", "credentials.json")
         creds = Credentials.from_service_account_file(creds_path, scopes=SCOPES)
 
     return gspread.authorize(creds)
-```
-
-Save the file.
-
----
-
-## Part 5 — Make Sure credentials.json is NOT Pushed to GitHub
-
-Open your `.gitignore` file in Notepad and make sure these two lines are in it:
-```
-credentials.json
-.env
 
 
 def get_spreadsheet():
