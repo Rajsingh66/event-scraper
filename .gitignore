@@ -1,0 +1,34 @@
+notepad .gitignore
+```
+
+Notepad opens. Paste this inside:
+```
+credentials.json
+.env
+__pycache__/
+*.pyc
+*.pyo
+scrapers/__pycache__/
+```
+
+Press `Ctrl+S` to save. Close Notepad.
+
+---
+
+## Method 2 — Create it Manually in File Explorer
+
+1. Open your project folder in File Explorer
+2. Right-click empty space → **New** → **Text Document**
+3. Name it `.gitignore` (with the dot at the start, and **no `.txt` at the end**)
+
+Windows might warn you about changing the extension — click **Yes**
+
+4. Right-click the new file → **Open with** → **Notepad**
+5. Paste this inside:
+```
+credentials.json
+.env
+__pycache__/
+*.pyc
+*.pyo
+scrapers/__pycache__/ 
